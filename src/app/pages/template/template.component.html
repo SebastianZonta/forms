@@ -1,0 +1,83 @@
+<h4>Template <small> forms </small></h4>
+<hr>
+<form autocomplete="off" #formSeba="ngForm" (ngSubmit)="save(formSeba)">
+    <div>
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Name</label>
+            <div class="col-8">
+                <input class="form-control" type="text" name="name" [class.is-invalid]="name.invalid && name.touched"
+                    [ngModel]="user.name" placeholder="Name" required #name="ngModel" minlength="5">
+                @if(name.invalid && name.touched){
+                <small class="form-text text-danger">Type 5 letters</small>
+                }
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Surname</label>
+            <div class="col-8">
+                <input class="form-control" name="surname" type="text"
+                    [class.is-invalid]="surname.invalid && surname.touched" [ngModel]="user.surname"
+                    placeholder="Surname" required #surname="ngModel" minlength="5">
+                @if(surname.invalid && surname.touched){
+                <small class="form-text text-danger">Type 5 letters</small>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Email</label>
+        <div class="col-8">
+            <input class="form-control" type="email" placeholder="Email"
+                pattern="[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+(\.[-a-zA-Z0-9~!$%^&amp;*_=+}{'?]+)*@([a-zA-Z0-9_][-a-zA-Z0-9_]*(\.[-a-zA-Z0-9_]+)*\.([cC][oO][mM]))(:[0-9]{1,5})?"
+                #email="ngModel" [class.is-invalid]="email.invalid && email.touched" [ngModel]="user.email" name="email"
+                required>
+            @if(email.invalid && email.touched){
+            <small class="form-text text-danger">Type a valid email</small>
+            }
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Name</label>
+        <div class="col-8">
+            <select name="country" [ngModel]="user.country" required class="form-control" #country="ngModel"
+                [class.is-invalid]="country.invalid && country.touched">
+                <option value="">[Choose a country]</option>
+                @for (country of countries; track $index) {
+                <option [value]="country.code"> {{country.name}}</option>
+                }
+            </select>
+            @if(country.invalid && country.touched){
+            <small class="form-text text-danger">Choose a valid country</small>
+            }
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Name</label>
+        <div class="col-8">
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" required="" value="M" [ngModel]="user.gender" name="gender" #gender="ngModel" [class.is-invalid]="gender.invalid && gender.touched">
+                <label for="">Male</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" required="" value="F" [ngModel]="user.gender" name="gender" #gender="ngModel">
+                <label for="">Female</label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group col-md-8">
+            <button type="submit" class="btn btn-outline-primary btn-block">
+                Save
+            </button>
+        </div>
+    </div>
+
+</form>
